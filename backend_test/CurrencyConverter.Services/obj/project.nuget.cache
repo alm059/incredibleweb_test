@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "2Q39ebP8m7qjpCMwGaJzUi2r2TVLjDd9V164fEQRQnpdqJGYKplK5vfWhS/RX2KW1Iwtb9YtOL1+emGGkUabOw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Alejandro\\Desktop\\incredibleweb\\incredibleweb\\backend_test\\CurrencyConverter.Services\\CurrencyConverter.Services.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Alejandro\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Alejandro\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\Alejandro\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
