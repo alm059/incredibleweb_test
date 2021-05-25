@@ -21,14 +21,17 @@ body{
 }
 
 #main_panel{
+	width:100%;
 	padding:1.5% 3%;
+}
+#main_panel > div{
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: flex-start;
 }
 @media (max-width: 500px) {
-	#main_panel{
+	#main_panel > div{
 		justify-content: center;
 	}
 }

@@ -48,13 +48,13 @@ class Movie extends React.Component {
 export function Movies(){
 	// Load movies from data layer
 	var moviesJSON = GetMovieData();
-	const numbers = [1, 2, 3, 4, 5];
+	// const numbers = [1, 2, 3, 4, 5];
 	const movies = [];
 	// foreach ({element : moviesJSON}){
 	// 	let test = <Movie title={element.title} />;
 	// }
 	for (const key in moviesJSON){
-		movies.push(<Movie title={moviesJSON[key].title} />);
+		movies.push(<Movie title={moviesJSON[key].title} year={moviesJSON[key].year} image={key} category={moviesJSON[key].category} rating=={moviesJSON[key].rating} />);
 	}
 	return (
 		<div>
