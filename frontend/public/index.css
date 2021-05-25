@@ -31,7 +31,7 @@ body{
 	justify-content: flex-start;
 }
 @media (max-width: 500px) {
-	#main_panel > div{
+	#main_panel{
 		justify-content: center;
 	}
 }
