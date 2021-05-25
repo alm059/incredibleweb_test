@@ -1,0 +1,30 @@
+.movie_box{
+	 box-shadow: 3px 3px 5px 6px #282828;
+	 margin: 10px 20px;
+	 width: 200px;
+	 text-align: center;
+}
+.movie_box > img{
+	width:200px;
+	height:200px;
+}
+.movie_box_title{
+	border-top:1px solid #505050;
+	padding:7px;
+	text-align: left;
+	font-size:1.2em;
+}
+.movie_box_data{
+	padding: 0 7px 7px 7px;
+	text-align: left;
+	font-size:1em;
+}
+.movie_box_data > span{
+	border-top:1px solid #505050;
+	text-align:center;
+	cursor:pointer;
+	width:100%;
+	display: block;
+	margin-top:15px;
+	padding:5px 0;
+}
