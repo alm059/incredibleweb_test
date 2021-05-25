@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import styles from './movies.module.css';
+import { GetMovieData } from '../data/request.js'
 
-export class Movie extends React.Component {
+class Movie extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			title: "Harry Potter",
+			title: "Title",
 			image: "logo512.png",
 			year: 0,
 			category: "No category",
@@ -15,7 +16,7 @@ export class Movie extends React.Component {
 		};
 	}
 	static getDerivedStateFromProps(props, state){
-		return {year: props.year}
+		return {title: props.title, year: props.year, image: props.id+".png", category: props.category, rating: props.rating};
 	}
 	displayData = () => {
 		if(this.state.dataOpen){
@@ -44,7 +45,21 @@ export class Movie extends React.Component {
 	}
 }
 
-// function ProcessMovies(){
+export function Movies(){
 	// Load movies from data layer
-// 	return ()
-// }
+	var moviesJSON = GetMovieData();
+	const numbers = [1, 2, 3, 4, 5];
+	const movies = [];
+	// foreach ({element : moviesJSON}){
+	// 	let test = <Movie title={element.title} />;
+	// }
+	for (const key in moviesJSON){
+		movies.push(<Movie title={moviesJSON[key].title} />);
+	}
+	return (
+		<div>
+		{movies}
+		</div>
+	);
+
+}
