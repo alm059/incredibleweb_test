@@ -1,7 +1,10 @@
+input:first-child{
+	width:60%;
+}
 input{
 	padding:4px;
 	background-color:transparent;
-	width:60%;
+	width:20%;
 	border: 1px solid #505050;
 	border-radius:3px;
 	color: #969696;
