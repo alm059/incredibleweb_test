@@ -1,5 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import { Movies } from './presentation/movies.js'
 import { SearchBar } from './presentation/filters.js'
 import styles from './index.module.css';
@@ -35,13 +41,26 @@ class Page extends React.Component {
 	render(){
 		return (
 			<div id="container">
+			<Router>
 				<div id={styles.search_panel}>
 					<SearchBar onKeyDown={filters => this.updateSearch(filters)} />
 				</div>
-			    <nav id={styles.toggable_panel}></nav>
+			    <nav id={styles.toggable_panel}>
+					<ul>
+						<li><Link to ="/about">About us</Link></li>
+					</ul>
+				</nav>
 			    <div id={styles.main_panel}>
-					<Movies onClick={id => this.openMovieData(id)} selectedMovie={this.state.selectedMovie} searchFilter={this.state.searchFilter} />
+					<Switch>
+						<Route path="/about">
+						About us!
+						</Route>
+						<Route path="/">
+							<Movies onClick={id => this.openMovieData(id)} selectedMovie={this.state.selectedMovie} searchFilter={this.state.searchFilter} />
+						</Route>
+					</Switch>
 				</div>
+			</Router>
 			</div>
 		);
 	}
