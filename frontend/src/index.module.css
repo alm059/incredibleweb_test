@@ -12,9 +12,25 @@ body{
 #toggable_panel{
 	background-color: #323232;
 	position:absolute;
-	display:none;
+	height:100%;
+	width:100%;
+	top:0;
+	left:0;
+	text-align: center;
+	font-size:2em;
+	/* display:none; */
+	transition: .5s all;
 }
-
+#toggle_panel_button{
+	position:absolute;
+	right:0;
+	left:105%;
+	margin-top:2.5%;
+}
+#toggable_panel > .link{
+	color: #F0F0F0 !important;
+	text-decoration: none;
+}
 #search_panel{
 	/* min-height:5%; */
 	width:100%;
