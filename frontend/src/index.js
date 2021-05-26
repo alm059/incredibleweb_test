@@ -22,6 +22,7 @@ class Page extends React.Component {
 				year: "",
 			},
 			navbarOpen: false,
+			videoOpen: false,
 		};
 	}
 	openMovieData(id){
@@ -46,14 +47,26 @@ class Page extends React.Component {
 			this.setState({navbarOpen: true});
 		}
 	}
+	toggleVideo(){
+		if(this.state.videoOpen){
+			this.setState({videoOpen: false});
+		}else{
+			this.setState({videoOpen: true});
+		}
+	}
 	render(){
 		var panelLocation = "0";
 		var toggleButtonLocation = "90%";
 		var button = "<";
+		var watchVideo = "none";
+
 		if(!this.state.navbarOpen){
 			panelLocation = "-100%";
 			toggleButtonLocation = "105%";
 			button = ">";
+			if(this.state.videoOpen){
+				watchVideo = "block";
+			}
 		}
 		return (
 			<div id="container">
@@ -74,7 +87,14 @@ class Page extends React.Component {
 						About us!
 						</Route>
 						<Route path="/">
-							<Movies onClick={id => this.openMovieData(id)} selectedMovie={this.state.selectedMovie} searchFilter={this.state.searchFilter} />
+							<Movies onWatchVideo={() => this.toggleVideo()} onClick={id => this.openMovieData(id)} selectedMovie={this.state.selectedMovie} searchFilter={this.state.searchFilter} />
+							<div id={styles.watch_panel} style={{display: watchVideo}} onClick={() => this.toggleVideo()}>
+								<video width="320" height="240" controls>
+									<source src="https://www.w3schools.com/tags/movie.mp4" type="video/mp4" />
+									<source src="https://www.w3schools.com/tags/movie.ogg" type="video/ogg" />
+									Your browser does not support the video tag.
+								</video>
+							</div>
 						</Route>
 					</Switch>
 				</div>

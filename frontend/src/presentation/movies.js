@@ -18,9 +18,6 @@ class Movie extends React.Component {
 	static getDerivedStateFromProps(props, state){
 		return {id: props.id, title: props.title, year: props.year, image: "./thumbnails/"+props.id+".jpg", category: props.category, rating: props.rating};
 	}
-	openMovie = () => {
-
-	}
 	checkFilter(styles){
 		if(!this.state.title.toLowerCase().includes(this.props.searchFilter["title"].toLowerCase()) ||
 			!this.state.category.toLowerCase().includes(this.props.searchFilter["category"].toLowerCase()) ||
@@ -43,7 +40,7 @@ class Movie extends React.Component {
 						Year: {this.state.year}<br />
 						Category: {this.state.category}<br />
 						Rating: {this.state.rating}<br />
-						<span onClick={this.openMovie}>Watch now</span>
+						<span onClick={this.props.onWatchVideo}>Watch now</span>
 					</div>
 				</div>);
 	}
@@ -71,7 +68,7 @@ export function Movies(props){
 		if(moviesJSON[key].id == props.selectedMovie){
 			dataOpen = true;
 		}
-		movies.push(<Movie onClick={() => props.onClick(moviesJSON[key].id)} dataOpen={dataOpen} searchFilter={props.searchFilter} title={moviesJSON[key].title} year={moviesJSON[key].year} id={moviesJSON[key].id} category={moviesJSON[key].category} rating={moviesJSON[key].rating} />);
+		movies.push(<Movie onWatchVideo={() => props.onWatchVideo()} onClick={() => props.onClick(moviesJSON[key].id)} dataOpen={dataOpen} searchFilter={props.searchFilter} title={moviesJSON[key].title} year={moviesJSON[key].year} id={moviesJSON[key].id} category={moviesJSON[key].category} rating={moviesJSON[key].rating} />);
 	}
 	return (
 		<div>
