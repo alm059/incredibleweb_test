@@ -11,6 +11,11 @@ input{
 	outline:0;
 	transition: all .2s;
 }
+@media (max-width: 500px) {
+	input{
+		width:60%;
+	}
+}
 input:hover{
 	border-radius:0;
 }

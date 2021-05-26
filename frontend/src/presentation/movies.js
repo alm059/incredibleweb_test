@@ -16,7 +16,7 @@ class Movie extends React.Component {
 		};
 	}
 	static getDerivedStateFromProps(props, state){
-		return {id: props.id, title: props.title, year: props.year, image: "data/thumbnails/"+props.id+".png", category: props.category, rating: props.rating};
+		return {id: props.id, title: props.title, year: props.year, image: "./thumbnails/"+props.id+".jpg", category: props.category, rating: props.rating};
 	}
 	openMovie = () => {
 

@@ -18,10 +18,14 @@ class Page extends React.Component {
 		};
 	}
 	openMovieData(id){
-		this.setState({selectedMovie: id});
+		if (this.state.selectedMovie != id){
+			this.setState({selectedMovie: id});
+		}else{
+			this.setState({selectedMovie: -1});
+		}
 	}
 	updateSearch(filters){
-		console.log(filters);
+		// console.log(filters);
 		var newFilter = this.state.searchFilter;
 		for(var key in filters){
 			newFilter[key] = filters[key];
