@@ -54,7 +54,7 @@ export function Movies(){
 	// 	let test = <Movie title={element.title} />;
 	// }
 	for (const key in moviesJSON){
-		movies.push(<Movie title={moviesJSON[key].title} year={moviesJSON[key].year} image={key} category={moviesJSON[key].category} rating=={moviesJSON[key].rating} />);
+		movies.push(<Movie title={moviesJSON[key].title} year={moviesJSON[key].year} image={key} category={moviesJSON[key].category} rating={moviesJSON[key].rating} />);
 	}
 	return (
 		<div>
