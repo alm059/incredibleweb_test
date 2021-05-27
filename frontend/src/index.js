@@ -4,7 +4,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  useLocation
 } from "react-router-dom";
 import { Movies } from './presentation/movies.js'
 import { SearchBar } from './presentation/filters.js'
@@ -24,6 +25,12 @@ class Page extends React.Component {
 			navbarOpen: false,
 			videoOpen: false,
 		};
+	}
+	static getDerivedStateFromProps(props, state){ //Update filters and selectedMovie
+		// Obtain from URL
+		var filters = {};
+		var selected = {};
+		return {selectedMovie: selected}
 	}
 	openMovieData(id){
 		if (this.state.selectedMovie != id){
@@ -72,7 +79,7 @@ class Page extends React.Component {
 			<div id="container">
 			<Router>
 				<div id={styles.search_panel}>
-					<SearchBar onKeyDown={filters => this.updateSearch(filters)} />
+					<SearchBar onKeyDown={filters => this.updateSearch(filters)} values={this.state.searchFilter} />
 				</div>
 			    <nav id={styles.toggable_panel} style={{left: panelLocation}}>
 					<div id={styles.toggle_panel_button} onClick={() => this.toggleNav()} style={{left: toggleButtonLocation}}>{button}</div>

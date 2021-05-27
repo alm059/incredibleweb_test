@@ -14,10 +14,10 @@ class Filter extends React.Component{
 	render(){
 		return (
 			<div>
-			<input placeholder="Search by title..." onKeyUp={(event) => this.updateSearch("title", event.target.value)} /><br /><br />
-			<input placeholder="Search by category..." onKeyUp={(event) => this.updateSearch("category", event.target.value)} />
-			<input placeholder="Search by year..." onKeyUp={(event) => this.updateSearch("year", event.target.value)} />
-			<input placeholder="Search by rating..." onKeyUp={(event) => this.updateSearch("rating", event.target.value)} />
+			<input placeholder="Search by title..." value={this.props.values["title"]} onKeyUp={(event) => this.updateSearch("title", event.target.value)} /><br /><br />
+			<input placeholder="Search by category..." value={this.props.values["category"]} onKeyUp={(event) => this.updateSearch("category", event.target.value)} />
+			<input placeholder="Search by year..." value={this.props.values["year"]} onKeyUp={(event) => this.updateSearch("year", event.target.value)} />
+			<input placeholder="Search by rating..." value={this.props.values["rating"]} onKeyUp={(event) => this.updateSearch("rating", event.target.value)} />
 			</div>
 		);
 	}
@@ -28,7 +28,7 @@ function Icons(){
 }
 
 export function SearchBar(props){
-	return (<Filter onKeyDown={props.onKeyDown} />);
+	return (<Filter onKeyDown={props.onKeyDown} values={props.values} />);
 }
 
 // export default { SearchBar };
