@@ -1,4 +1,4 @@
-import { combineReducers } from "redux";
+// import { combineReducers } from "redux";
 import initialState from "./initialState.js";
 
 export default function(state=initialState, action){
@@ -18,21 +18,29 @@ export default function(state=initialState, action){
 				return{
 					...state,
 					"selectedMovie": -1,
+					"paramsNeedUpdating": true,
 				}
 			}
 			return{
 				...state,
 				"selectedMovie": action.payload.movieId,
+				"paramsNeedUpdating": true,
 			}
 		case "UPDATE_FILTERS":
 			return{
 				...state,
-				"searchFilter": {...state["searchFilter"], [action.payload.filter]: action.payload.value}
+				"searchFilter": {...state["searchFilter"], [action.payload.filter]: action.payload.value},
+				"paramsNeedUpdating": true,
 			}
 		case "TOGGLE_CINEMA_MODE":
 			return{
 				...state,
 				"videoOpen": !state["videoOpen"],
+			}
+		case "PARAMS_NO_LONGER_NEED_UPDATING":
+			return{
+				...state,
+				"paramsNeedUpdating": false,
 			}
 		default: {
 			return state

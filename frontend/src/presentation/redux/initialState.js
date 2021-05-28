@@ -8,5 +8,6 @@ const state = {
 	},
 	navOpen: false,
 	videoOpen: false,
+	paramsNeedUpdating: false
 };
 export default state;

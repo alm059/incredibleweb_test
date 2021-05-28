@@ -1,6 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import styles from './filters.module.css';
+import query from 'query-string'
 
 class Filter extends React.Component{
 	constructor(props){
