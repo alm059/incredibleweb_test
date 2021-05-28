@@ -29,7 +29,7 @@ class Movie extends React.Component {
 	}
 	handleClick(){
 		this.props.store.dispatch({type: "OPEN_MOVIE_DATA", payload: {"movieId": this.state.id}})
-		var copyText = "";
+		var copyText = "/?";
 		if(this.props.store.getState()["selectedMovie"] != -1)
 			copyText += "selectedMovie=" + this.props.store.getState()["selectedMovie"] + "&";
 		if(this.props.store.getState()["searchFilter"]["title"] != "")
