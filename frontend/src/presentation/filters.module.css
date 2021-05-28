@@ -22,3 +22,8 @@ input:hover{
 input:selected{
 	border-radius:0;
 }
+#share{
+	position:absolute;
+	top:2.5%;
+	right:2.5%;
+}

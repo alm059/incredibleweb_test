@@ -21,6 +21,16 @@ import styles from './index.module.css';
 
 
 function App(props){
+    // if(store.getState()["paramsNeedUpdating"]){ // Update params from updates values in store (share movie or search)
+    	// var newParams = "";
+    	// if(store.getState()["searchFilter"]["title"] =! ""){
+    	// 	newParams += "titleFilter=" + store.getState()["searchFilter"]["title"] + "&";
+    	// }
+    	// console.log("test");
+    	// props.history.push({ search: newParams});
+    	// store.dispatch({type: "PARAMS_NO_LONGER_NEED_UPDATING"});
+    // }
+
 	var panelLocation = "0";
 	var toggleButtonLocation = "90%";
 	var button = "<";

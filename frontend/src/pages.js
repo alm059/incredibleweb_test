@@ -10,8 +10,8 @@ import initialState from "./presentation/redux/initialState.js"
 export function Main(props){
 		// Propagate query params to store
 		// THIS WILL ONLY UPDATE THE STORE THE FIRST TIME THE SITE LOADS WITH queryParams
-		// For the other times the store and queryparams stay in sync because of the components
-		if(props.location.search.length > 0){
+		// For the other times the store will hold the values until shared, where an URL will be created
+		if(props.location.search.length > 0 && store.getState()["paramsNeedUpdating"]){
 			var queryParams = new URLSearchParams(props.location.search);
 			if(queryParams.get("selectedMovie") != null && store.getState()["selectedMovie"] == initialState["selectedMovie"])
 				store.dispatch({type: "OPEN_MOVIE_DATA", payload: {"movieId": parseInt(queryParams.get("selectedMovie"))}});
@@ -23,16 +23,8 @@ export function Main(props){
 				store.dispatch({type: "UPDATE_FILTERS", payload: {"filter": "year", "value": queryParams.get("yearFilter")}});
 			if(queryParams.get("ratingFilter") != null && store.getState()["searchFilter"]["rating"] == initialState["searchFilter"]["rating"])
 				store.dispatch({type: "UPDATE_FILTERS", payload: {"filter": "rating", "value": queryParams.get("ratingFilter")}});
+			store.dispatch({type: "QUERY_PARAMS_UPDATED"});
 		}
-		// if(store.getState()["paramsNeedUpdating"]){ // Update params from updates values in store (share movie or search)
-		// 	var newParams = "";
-		// 	if(store.getState()["searchFilter"]["title"] =! ""){
-		// 		newParams += "titleFilter=" + store.getState()["searchFilter"]["title"] + "&";
-		// 	}
-		// 	console.log("test");
-		// 	props.history.push({ search: newParams});
-		// 	store.dispatch({type: "PARAMS_NO_LONGER_NEED_UPDATING"});
-		// }
 
 		var watchVideo = "none";
 		if(!store.getState()["navOpen"] && store.getState()["videoOpen"]){
