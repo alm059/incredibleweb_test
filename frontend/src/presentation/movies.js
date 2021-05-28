@@ -27,13 +27,28 @@ class Movie extends React.Component {
 		}
 		return styles
 	}
+	handleClick(){
+		this.props.store.dispatch({type: "OPEN_MOVIE_DATA", payload: {"movieId": this.state.id}})
+		var copyText = "";
+		if(this.props.store.getState()["selectedMovie"] != -1)
+			copyText += "selectedMovie=" + this.props.store.getState()["selectedMovie"] + "&";
+		if(this.props.store.getState()["searchFilter"]["title"] != "")
+			copyText += "titleFilter=" + this.props.store.getState()["searchFilter"]["title"] + "&";
+		if(this.props.store.getState()["searchFilter"]["category"] != "")
+			copyText += "categoryFilter=" + this.props.store.getState()["searchFilter"]["category"] + "&";
+		if(this.props.store.getState()["searchFilter"]["year"] != "")
+			copyText += "yearFilter=" + this.props.store.getState()["searchFilter"]["year"] + "&";
+		if(this.props.store.getState()["searchFilter"]["rating"] != "")
+			copyText += "ratingFilter=" + this.props.store.getState()["searchFilter"]["rating"] + "&";
+		window.history.replaceState(null, "React App", copyText)
+	}
 	render(){
 		let movieBoxStyle = (this.props.store.getState()["selectedMovie"] == this.state.id ? {boxShadow: "0px 4px 8px 0px inset #282828",}:{boxShadow: "3px 3px 5px 6px #282828"});
 		const movieBoxDataStyle = (this.props.store.getState()["selectedMovie"] == this.state.id ? {display: "block"}:{display: "none"});
 
 		movieBoxStyle = this.checkFilter(movieBoxStyle, this.props.store.getState()["searchFilter"]);
 
-		return (<div class={styles.movie_box} style={movieBoxStyle} onClick={id => this.props.store.dispatch({type: "OPEN_MOVIE_DATA", payload: {"movieId": this.state.id}})}>
+		return (<div class={styles.movie_box} style={movieBoxStyle} onClick={() => this.handleClick()}>
 					<img src={this.state.image} />
 					<div class={styles.movie_box_title}>{this.state.title}</div>
 					<div class={styles.movie_box_data} style={movieBoxDataStyle}>

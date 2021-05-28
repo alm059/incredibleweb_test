@@ -9,6 +9,18 @@ class Filter extends React.Component{
 	}
 	handleChange(event){
 		this.props.store.dispatch({type: "UPDATE_FILTERS", payload: {"filter": event.target.name, "value": event.target.value}});
+		var copyText = "";
+		if(this.props.store.getState()["selectedMovie"] != -1)
+			copyText += "selectedMovie=" + this.props.store.getState()["selectedMovie"] + "&";
+		if(this.props.store.getState()["searchFilter"]["title"] != "")
+			copyText += "titleFilter=" + this.props.store.getState()["searchFilter"]["title"] + "&";
+		if(this.props.store.getState()["searchFilter"]["category"] != "")
+			copyText += "categoryFilter=" + this.props.store.getState()["searchFilter"]["category"] + "&";
+		if(this.props.store.getState()["searchFilter"]["year"] != "")
+			copyText += "yearFilter=" + this.props.store.getState()["searchFilter"]["year"] + "&";
+		if(this.props.store.getState()["searchFilter"]["rating"] != "")
+			copyText += "ratingFilter=" + this.props.store.getState()["searchFilter"]["rating"] + "&";
+		window.history.replaceState(null, "React App", copyText)
 	}
 	shareQueryParamsLink(){
 		var copyText = "localhost:3000/?";
@@ -23,6 +35,7 @@ class Filter extends React.Component{
 		if(this.props.store.getState()["searchFilter"]["rating"] != "")
 			copyText += "ratingFilter=" + this.props.store.getState()["searchFilter"]["rating"] + "&";
 		navigator.clipboard.writeText(copyText);
+		// window.history.replaceState(null, "New Page Title", copyText.substring(14))
 	}
 	render(){
 		return (
