@@ -6,18 +6,16 @@ class Filter extends React.Component{
 	constructor(props){
 		super(props);
 	}
-	updateSearch(targetFilter, value){
-		var test = {};
-		test[targetFilter] = value;
-		this.props.onKeyDown(test)
+	handleChange(event){
+		this.props.store.dispatch({type: "UPDATE_FILTERS", payload: {"filter": event.target.name, "value": event.target.value}});
 	}
 	render(){
 		return (
 			<div>
-			<input placeholder="Search by title..." value={this.props.values["title"]} onKeyUp={(event) => this.updateSearch("title", event.target.value)} /><br /><br />
-			<input placeholder="Search by category..." value={this.props.values["category"]} onKeyUp={(event) => this.updateSearch("category", event.target.value)} />
-			<input placeholder="Search by year..." value={this.props.values["year"]} onKeyUp={(event) => this.updateSearch("year", event.target.value)} />
-			<input placeholder="Search by rating..." value={this.props.values["rating"]} onKeyUp={(event) => this.updateSearch("rating", event.target.value)} />
+				<input name="title" placeholder="Search by title..." onChange={(event) => this.handleChange(event)} /><br /><br />
+				<input name="category" placeholder="Search by category..." onChange={(event) => this.handleChange(event)} />
+				<input name="year" placeholder="Search by year..." onChange={(event) => this.handleChange(event)} />
+				<input name="rating" placeholder="Search by rating..." onChange={(event) => this.handleChange(event)} />
 			</div>
 		);
 	}
@@ -28,7 +26,7 @@ function Icons(){
 }
 
 export function SearchBar(props){
-	return (<Filter onKeyDown={props.onKeyDown} values={props.values} />);
+	return (<Filter store={props.store} />);
 }
 
 // export default { SearchBar };

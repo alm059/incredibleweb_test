@@ -31,6 +31,8 @@ body{
 	color: #F0F0F0 !important;
 	text-decoration: none;
 }
+#toggable_panel > li{
+}
 #search_panel{
 	/* min-height:5%; */
 	width:100%;

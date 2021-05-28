@@ -16,31 +16,31 @@ class Movie extends React.Component {
 		};
 	}
 	static getDerivedStateFromProps(props, state){
-		return {id: props.id, title: props.title, year: props.year, image: "./thumbnails/"+props.id+".jpg", category: props.category, rating: props.rating};
+		return {id: props.movieData.id, title: props.movieData.title, year: props.movieData.year, image: "./thumbnails/"+props.movieData.id+".jpg", category: props.movieData.category, rating: props.movieData.rating};
 	}
-	checkFilter(styles){
-		if(!this.state.title.toLowerCase().includes(this.props.searchFilter["title"].toLowerCase()) ||
-			!this.state.category.toLowerCase().includes(this.props.searchFilter["category"].toLowerCase()) ||
-			!this.state.rating.toString().includes(this.props.searchFilter["rating"]) ||
-			!this.state.year.toString().includes(this.props.searchFilter["year"])){
+	checkFilter(styles, searchFilter){
+		if(!this.state.title.toLowerCase().includes(searchFilter["title"].toLowerCase()) ||
+			!this.state.category.toLowerCase().includes(searchFilter["category"].toLowerCase()) ||
+			!this.state.rating.toString().includes(searchFilter["rating"]) ||
+			!this.state.year.toString().includes(searchFilter["year"])){
 			return {display:"none",};
 		}
 		return styles
 	}
 	render(){
-		let movieBoxStyle = (this.props.dataOpen ? {boxShadow: "0px 4px 8px 0px inset #282828",}:{boxShadow: "3px 3px 5px 6px #282828"});
-		const movieBoxDataStyle = (this.props.dataOpen ? {display: "block"}:{display: "none"});
+		let movieBoxStyle = (this.props.store.getState()["selectedMovie"] == this.state.id ? {boxShadow: "0px 4px 8px 0px inset #282828",}:{boxShadow: "3px 3px 5px 6px #282828"});
+		const movieBoxDataStyle = (this.props.store.getState()["selectedMovie"] == this.state.id ? {display: "block"}:{display: "none"});
 
-		movieBoxStyle = this.checkFilter(movieBoxStyle);
+		movieBoxStyle = this.checkFilter(movieBoxStyle, this.props.store.getState()["searchFilter"]);
 
-		return (<div class={styles.movie_box} style={movieBoxStyle} onClick={this.props.onClick}>
+		return (<div class={styles.movie_box} style={movieBoxStyle} onClick={id => this.props.store.dispatch({type: "OPEN_MOVIE_DATA", payload: {"movieId": this.state.id}})}>
 					<img src={this.state.image} />
 					<div class={styles.movie_box_title}>{this.state.title}</div>
 					<div class={styles.movie_box_data} style={movieBoxDataStyle}>
 						Year: {this.state.year}<br />
 						Category: {this.state.category}<br />
 						Rating: {this.state.rating}<br />
-						<span onClick={this.props.onWatchVideo}>Watch now</span>
+						<span onClick={id => this.props.store.dispatch({type: "TOGGLE_CINEMA_MODE"})}>Watch now</span>
 					</div>
 				</div>);
 	}
@@ -63,12 +63,9 @@ export function Movies(props){
 			}
 		}
 	}
+	// Create an array of movie components
 	for (const key in moviesJSON){
-		let dataOpen = false;
-		if(moviesJSON[key].id == props.selectedMovie){
-			dataOpen = true;
-		}
-		movies.push(<Movie onWatchVideo={() => props.onWatchVideo()} onClick={() => props.onClick(moviesJSON[key].id)} dataOpen={dataOpen} searchFilter={props.searchFilter} title={moviesJSON[key].title} year={moviesJSON[key].year} id={moviesJSON[key].id} category={moviesJSON[key].category} rating={moviesJSON[key].rating} />);
+		movies.push(<Movie store={props.store} movieData={moviesJSON[key]} />);
 	}
 	return (
 		<div>
